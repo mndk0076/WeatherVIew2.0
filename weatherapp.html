@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather App</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300" rel="stylesheet">
+    </head>
+    <body>
+        <div id="container">
+                <div id="top-section">
+                    <div id="top-wrapper">
+                        <div id="box-container">
+                            <div class="box-ma">
+                                <div class="content-container">
+                                    <span class="city" id="ma"></span>
+                                    <span class="desc" id="ma_desc"></span>
+                                    <span class="temp" id="ma_temp"></span> 
+                                </div>
+                            </div>
+                            <div class="box-lo">
+                                <div class="content-container">
+                                    <span class="city" id="lo"></span>
+                                    <span class="desc" id="lo_desc"></span>
+                                    <span class="temp" id="lo_temp"></span> 
+                                </div>
+                            </div>
+                            <div class="box-pr">
+                                <div class="content-container">
+                                    <span class="city" id="pr"></span>
+                                    <span class="desc" id="pr_desc"></span>
+                                    <span class="temp" id="pr_temp"></span> 
+                                </div>
+                            </div>
+                            <div class="box-ro">
+                                <div class="content-container">
+                                    <span class="city" id="ro"></span>
+                                    <span class="desc" id="ro_desc"></span>
+                                    <span class="temp" id="ro_temp"></span> 
+                                </div> 
+                            </div>
+                            <div class="box-mo">
+                                <div class="content-container">
+                                    <span class="city" id="mo"></span>
+                                    <span class="desc" id="mo_desc"></span>
+                                    <span class="temp" id="mo_temp"></span> 
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div id="top-bot-wrapper">
+                        <div class="region">
+                            <span id="region-title">Region:</span>
+                            <select>
+                                <option value="euro">Europe</option>
+                                <option value="asia">Asia</option>
+                                <option value="north">North America</option>
+                            </select>
+                            <form id="search">
+                                <input type="text" id="search" placeholder="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="left-section">
+                    
+                </div>
+                <div id="right-section">
+
+                </div>
+            </div>
+        <script src="weatherscript.js"></script>
+    </body>
+</html>

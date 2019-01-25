@@ -1,0 +1,162 @@
+html{
+    font-family: 'IBM Plex Sans', sans-serif;
+    letter-spacing: 3px;
+}
+body{
+    background-image: url(/images/background.jpg);
+    background-size: 100% 100vh;
+    background-position: center center;
+    background-attachment: fixed;
+}
+#container{
+    height: 85vh;
+    width: 85%;
+    position: absolute; /*it can be fixed too*/
+    left:0; right:0;
+    top:0; bottom:0;
+    margin:auto;
+    display: inline-block;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+#top-section{
+    height: 35%;
+    background-color: rgb(16, 53, 70, .75);
+}
+#left-section{
+    background-color: rgb(226, 169, 117, .75);
+    width: 35%;
+    height: 65%;
+    float: left;
+}
+#right-section{
+    background-color: rgb(35, 131, 189, .75);
+    width: 65%;
+    height: 65%;
+    float: right;
+}
+#top-wrapper{
+    height: 70%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+#box-container{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    margin-bottom: 5px;
+}
+.city, .date, .temp{
+    display: block; 
+    color: whitesmoke;
+    letter-spacing: 3px;
+}
+.desc{
+    color: coral;
+}
+.city{
+    font-size: 17px;
+}
+.temp{
+    font-size: 22px;
+    font-weight: 100;
+}
+.box-pr, .box-lo, .box-ro, .box-mo, .box-ma{
+    background-size: cover;
+    background-position: bottom left;
+    flex: 1;
+    height: 100%;
+    margin: auto 1%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    display: flex;
+}
+.box-ma{
+    background-image: url(images/madrid.jpeg);
+    margin-left: 30px;
+}
+.box-lo{
+    background-image: url(images/london.jpg);
+}
+.box-pr{
+    background-image: url(/images/paris.jpg);
+}
+.box-ro{
+    background-image: url(images/rome.jpg);
+}
+.box-mo{
+    margin-right: 30px;
+    background-image: url(/images/moscow.jpg);
+}
+.box:last-child{
+    margin-right: 5%;
+}
+.box:first-child{
+    margin-left: 5%;
+}
+.content-container{
+    margin: auto 0;
+    margin-left: 10px;
+}
+#top-bot-wrapper{
+    display: flex;
+    height: 30%;
+    width: 100%;
+}
+.region{
+    margin-left: 10px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: 1.5%;
+}
+#region-title{
+    color: coral;
+}
+.region select{
+    background-color: rgb(35, 131, 189, .75);
+    color: whitesmoke;
+    padding-left: 10px;
+    width: 135px;
+    height: 27px;
+    border: none;
+    -webkit-appearance: button;
+    outline: none;
+    border-radius: 0;
+}
+#search{
+    display: inline-block;
+}
+form input[type=text], select {
+    background-color: rgb(35, 131, 189, .75);
+    color: whitesmoke;
+    padding-left: 15px;
+    margin-left: 5px;
+    width: 120px;
+    height: 25px;
+    border: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;;
+}
+::placeholder {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: whitesmoke;
+    opacity: 1; /* Firefox */
+    font-size: 14px;;
+}
+/*not working
+.region:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: red;
+}
+.region select option{
+    background-color: #33CC33;
+}*/
+
