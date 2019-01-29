@@ -1,9 +1,9 @@
 html{
     font-family: 'IBM Plex Sans', sans-serif;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 }
 body{
-    background-image: url(/images/background.jpg);
+    background-image: url(images/background.jpg);
     background-size: 100% 100vh;
     background-position: center center;
     background-attachment: fixed;
@@ -21,18 +21,6 @@ body{
 #top-section{
     height: 35%;
     background-color: rgb(16, 53, 70, .75);
-}
-#left-section{
-    background-color: rgb(226, 169, 117, .75);
-    width: 35%;
-    height: 65%;
-    float: left;
-}
-#right-section{
-    background-color: rgb(35, 131, 189, .75);
-    width: 65%;
-    height: 65%;
-    float: right;
 }
 #top-wrapper{
     height: 70%;
@@ -81,14 +69,14 @@ body{
     background-image: url(images/london.jpg);
 }
 .box-pr{
-    background-image: url(/images/paris.jpg);
+    background-image: url(images/paris.jpg);
 }
 .box-ro{
     background-image: url(images/rome.jpg);
 }
 .box-mo{
     margin-right: 30px;
-    background-image: url(/images/moscow.jpg);
+    background-image: url(images/moscow.jpg);
 }
 .box:last-child{
     margin-right: 5%;
@@ -114,6 +102,7 @@ body{
 }
 #region-title{
     color: coral;
+    font-size: 18px;
 }
 .region select{
     background-color: rgb(35, 131, 189, .75);
@@ -129,7 +118,7 @@ body{
 #search{
     display: inline-block;
 }
-form input[type=text], select {
+form input[type=text], select, #search {
     background-color: rgb(35, 131, 189, .75);
     color: whitesmoke;
     padding-left: 15px;
@@ -159,4 +148,163 @@ form input[type=text], select {
 .region select option{
     background-color: #33CC33;
 }*/
+/* LEFT SECTION */
+#left-section{
+    background-color: rgb(189, 93, 35, .75);
+    width: 40%;
+    height: 65%;
+    float: left;
+    display: flex;
+}
+#left-container{
+    margin: auto;
+    width: 100%;
+    color: whitesmoke;
+}
+#left-maininfo{
+    text-align: center;
+}
+#left-city{
+    font-size: 30px;
+}
+#left-date{
+    font-size: 20px;
+}
+#left-time{
+    font-size: 20px;
+    display: block;
+    margin-top: 3px;
+}
+#left-icon{
+    display: block;
+    font-size: 50px;
+    margin-top: -20px;
+}
+#left-temp{
+    display: block;
+    margin-top: -20px;
+    font-size: 25px;
+}
+.spacing{
+    display: inline-block;
+    padding: 2px;
+    margin: 0;
+}
+.left-info{
+    width: 100%;
+}
+.left-box{
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    float: left;
+    padding-left: 30px;
+    margin: 5px 0;
+}
+.left-info span{
+    font-size: 16px;
+}
+.right-box{
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    float: left;
+    padding-left: 10px;
+    margin: 5px 0;
+}
+/* RIGHT SECTION */
+#right-section{
+    background-color: rgb(35, 131, 189, .75);
+    width: 60%;
+    height: 65%;
+    float: right;
+    position: relative;
+}
+#right-menu{
+    height: 12%;
+}
+#today-menu, #forecast-menu{
+    display: inline-block;
+    padding: 7px 30px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color:whitesmoke;
+}
+#forecast-menu{
+    margin-left: -15px;
+}
+#today-menu{
+    margin-left: 20px;
+    background-color: coral;
+}
+#today-menu:hover, #forecast-menu:hover{
+    cursor: pointer;
+}
+#today{
+    width: 70%;
+    height: 88%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -10px;
+    margin-left: 20%;
+}
+.right-left-col{
+    width: 25%;
+    float: left;
+    height: 100%;   
+}
+.right-right-col{
+    float: right;
+    width: 50%;
+    height: 100%;
+}  
+.right-center-col{
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+.right-time, .right-temp, .right-desc{
+    display: block;
+    color: whitesmoke;
+    font-size: 20px;
+    margin: 20px 0;
+}
+.right-time{
+    text-align: justify;
+}
+.right-temp{
+    text-align: left;
+    margin-left: 50%;
+}
+.right-desc{
+    text-align: left;
+    margin-left: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
