@@ -1,17 +1,19 @@
 let appId = 'd9b1ca45de6cd478f71d696f620e077b';
+let appIdForecast = '886705b4c1182eb1c69f28eb8c520e20';
 let units = 'metric';
 let url = `http://api.openweathermap.org/data/2.5/weather?q=Paris&units=${units}&APPID=${appId}`;
 window.onload = function PageLoad(){
+    getLocation();
     regionCities();
     search();  
     forecast();
-    getLocation();
 }
 function getLocation(){
     navigator.geolocation.getCurrentPosition(function(position){
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;   
         
+        //left section - main weather
         fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`).then(result => {
             return result.json();
         }).then(result => {
@@ -39,7 +41,6 @@ function getLocation(){
                         document.getElementById('left-city').innerHTML = city + ", " + country;
                     });
             }); 
-            console.log(resultFromServer.weather[0].main);
             switch (resultFromServer.weather[0].main){
                 case 'Clear':
                         document.getElementById('left-icon').innerHTML = '<i class="fal fa-sun-cloud"></i>';
@@ -74,7 +75,8 @@ function getLocation(){
             document.getElementById('time1').innerHTML = 'Now';   
             document.getElementById('desc1').innerHTML = desc.charAt(0).toUpperCase() + desc.slice(1);   
             document.getElementById('temp1').innerHTML = temp.toFixed(0) + "&#8451";
-
+            
+            //get today forecast
             fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=7&units=${units}&APPID=${appId}`).then(result => {
                 return result.json();
             }).then(result => {
@@ -95,8 +97,48 @@ function getLocation(){
                 }
             }
         }
+        //get forecast
+        fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&units=${units}&cnt=8&APPID=${appIdForecast}`).then(result => {
+            return result.json();
+        }).then(result => {
+            initforecast(result);
+        })
+        function initforecast(resultFromServer){
+             for(let i = 0; i < resultFromServer.list.length; i++){
+                let date = resultFromServer.list[i].dt;
+                let icon = resultFromServer.list[i].weather[0].main;
+                let temp = resultFromServer.list[i].temp.day;    
+                let dateID = 'date'+[i+1];
+                let iconID = 'icon'+[i+1];
+                let tempID = 'ftemp'+[i+1];
+
+                document.getElementById(dateID).innerHTML = dateFormatF(date);   
+                document.getElementById(tempID).innerHTML = temp.toFixed(0) + "&#8451";
+
+                switch (icon){
+                case 'Clear':
+                        document.getElementById(iconID).innerHTML = '<i class="fal fa-sun-cloud"></i>';
+                        break;
+                case 'Clouds':
+                        document.getElementById(iconID).innerHTML = '<i class="fal fa-clouds"></i>';
+                        break;
+                case 'Thunderstorm':
+                        document.getElementById(iconID).innerHTML = '<i class="fal fa-thunderstorm"></i>';
+                        break;
+                case 'Snow':
+                        document.getElementById(iconID).innerHTML = '<i class="fal fa-snowflakes"></i>';
+                        break;
+                case 'Rain':
+                case 'Drizzle':
+                case 'Mist':
+                        document.getElementById(iconID).innerHTML = '<i class="fal fa-cloud-rain"></i>';
+                        break;
+                default:
+                        break;  
+            }
+            }  
+        }
     }); 
-    $("#left-section").fadeIn(1000);
 }
 function forecast(){
     $(document).ready(function(){
@@ -110,6 +152,7 @@ function forecast(){
     $(document).ready(function(){
         $("#forecast-menu").click(function(){
             $("#forecast").fadeIn(1000);
+            $("#forecast").css("display", "block");
             $("#today").hide();
             $("#forecast-menu").css("background-color", "coral");
             $("#today-menu").css("background-color", "transparent");
@@ -117,7 +160,8 @@ function forecast(){
     }); 
     $("#search").on("keydown",function search(e) {
         if(e.keyCode == 13) {
-            $('#right-container').fadeIn(1000);
+            $('#right-container').hide();
+            $('#right-container').fadeIn(1500);
             let searchIn = $(this).val();
             
             fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${searchIn}&cnt=7&units=${units}&APPID=${appId}`).then(result => {
@@ -139,12 +183,54 @@ function forecast(){
                     document.getElementById(tempID).innerHTML = temp.toFixed(0) + "&#8451";
                 }
             }
+            fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${searchIn}&units=${units}&cnt=8&APPID=${appIdForecast}`).then(result => {
+                return result.json();
+            }).then(result => {
+                initforecast(result);
+            })
+            function initforecast(resultFromServer){
+                 for(let i = 0; i < resultFromServer.list.length; i++){
+                    let date = resultFromServer.list[i].dt;
+                    let icon = resultFromServer.list[i].weather[0].main;
+                    let temp = resultFromServer.list[i].temp.day;    
+                    let dateID = 'date'+[i+1];
+                    let iconID = 'icon'+[i+1];
+                    let tempID = 'ftemp'+[i+1];
+
+                    document.getElementById(dateID).innerHTML = dateFormatF(date);   
+                    document.getElementById(tempID).innerHTML = temp.toFixed(0) + "&#8451";
+                   
+                    switch (icon){
+                    case 'Clear':
+                            document.getElementById(iconID).innerHTML = '<i class="fal fa-sun-cloud"></i>';
+                            break;
+                    case 'Clouds':
+                            document.getElementById(iconID).innerHTML = '<i class="fal fa-clouds"></i>';
+                            break;
+                    case 'Thunderstorm':
+                            document.getElementById(iconID).innerHTML = '<i class="fal fa-thunderstorm"></i>';
+                            break;
+                    case 'Snow':
+                            document.getElementById(iconID).innerHTML = '<i class="fal fa-snowflakes"></i>';
+                            break;
+                    case 'Rain':
+                    case 'Drizzle':
+                    case 'Mist':
+                            document.getElementById(iconID).innerHTML = '<i class="fal fa-cloud-rain"></i>';
+                            break;
+                    default:
+                            break;  
+                }
+                }  
+            }
+            
         }
     });
 }
 function search() {
      $("#search").on("keydown",function search(e) {
         if(e.keyCode == 13) {
+            $('#left-container').hide();
             $('#left-container').fadeIn(1000);
             let searchIn = $(this).val();
             
@@ -176,7 +262,6 @@ function search() {
                         document.getElementById('left-city').innerHTML = city + ", " + country;
                     });
                 }); 
-                console.log(resultFromServer.weather[0].main);
                 switch (resultFromServer.weather[0].main){
                     case 'Clear':
                             document.getElementById('left-icon').innerHTML = '<i class="fal fa-sun-cloud"></i>';
@@ -211,10 +296,22 @@ function search() {
                 document.getElementById('time1').innerHTML = 'Now';   
                 document.getElementById('desc1').innerHTML = desc.charAt(0).toUpperCase() + desc.slice(1);   
                 document.getElementById('temp1').innerHTML = temp.toFixed(0) + "&#8451";
-                console.log(resultFromServer.sys.sunrise);
             }
         }
      });
+}
+function dateFormatF(resultFromServer){
+    var monthNames = [
+    "Jan", "Feb", "Mar",
+    "Apr", "May", "Jun", "Jul",
+    "Aug", "Sep", "Oct",
+    "Nov", "Dec"];
+
+    let d = new Date(resultFromServer * 1000);
+    let day = d.getDate();
+    let monthIndex = d.getMonth();
+
+    return day + ' ' + monthNames[monthIndex];
 }
 function dateFormat(resultFromServer){
     var monthNames = [

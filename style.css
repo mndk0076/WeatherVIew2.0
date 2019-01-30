@@ -230,9 +230,6 @@ form input[type=text], select, #search {
     border-radius: 5px;
     color:whitesmoke;
 }
-#forecast-menu{
-    margin-left: -15px;
-}
 #today-menu{
     margin-left: 20px;
     background-color: coral;
@@ -247,6 +244,7 @@ form input[type=text], select, #search {
     margin: 0 auto;
     margin-top: -10px;
     margin-left: 20%;
+    position: absolute;
 }
 .right-left-col{
     width: 25%;
@@ -280,7 +278,54 @@ form input[type=text], select, #search {
     text-align: left;
     margin-left: 20px;
 }
-
+#forecast-menu{
+    margin-left: -15px;
+}
+#forecast{
+    height: 88%;
+    width: 100%;
+    position: absolute;
+    display: none;
+}
+.forecast-top, .forecast-bottom{
+    height: 44%;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+}
+.forecast-bottom{
+    margin-top: 10px;
+}
+.forecast-container{
+    width: 100%;
+    display: flex;
+    margin: 0 20px;
+}
+.forecast-box{
+    display: inline-block;
+    background-color: rgb(0, 0, 0, .35);
+    margin: 0 10px;
+    border-radius: 10%;
+    box-shadow: 0 0 30px rgba(0,0,0,0.35);
+    flex: 1;
+    height: 97%;
+    position: relative;
+}
+.forecast-date, .forecast-icon, .forecast-temp{
+    display: block;
+    color: whitesmoke;
+    margin: 0;
+    font-size: 22px;
+    margin: 10px 0;
+}
+.forecast-date{
+    margin-top: 16px;
+}
+.forecast-icon{
+    font-size: 40px;
+    color: coral; 
+}
 
 
 
