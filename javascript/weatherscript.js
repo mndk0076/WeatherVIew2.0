@@ -2,6 +2,13 @@ let appId = 'd9b1ca45de6cd478f71d696f620e077b';
 let appIdForecast = '886705b4c1182eb1c69f28eb8c520e20';
 let units = 'metric';
 let url = `http://api.openweathermap.org/data/2.5/weather?q=Paris&units=${units}&APPID=${appId}`;
+    var overlay = document.getElementById("overlay");
+
+    window.addEventListener('load', function(){
+      overlay.style.display = 'none';
+        $("#container").css("display", "block");
+    })
+
 window.onload = function PageLoad(){
     getLocation();
     regionCities();
@@ -41,27 +48,10 @@ function getLocation(){
                         document.getElementById('left-city').innerHTML = city + ", " + country;
                     });
             }); 
-            switch (resultFromServer.weather[0].main){
-                case 'Clear':
-                        document.getElementById('left-icon').innerHTML = '<i class="fal fa-sun-cloud"></i>';
-                        break;
-                case 'Clouds':
-                        document.getElementById('left-icon').innerHTML = '<i class="fal fa-clouds"></i>';
-                        break;
-                case 'Thunderstorm':
-                        document.getElementById('left-icon').innerHTML = '<i class="fal fa-thunderstorm"></i>';
-                        break;
-                case 'Snow':
-                        document.getElementById('left-icon').innerHTML = '<i class="fal fa-snowflakes"></i>';
-                        break;
-                case 'Rain':
-                case 'Drizzle':
-                case 'Mist':
-                        document.getElementById('left-icon').innerHTML = '<i class="fal fa-cloud-rain"></i>';
-                        break;
-                default:
-                        break;  
-            }
+            let weatherMain = resultFromServer.weather[0].main;
+            
+            weatherIcon(weatherMain, 'left-icon');
+
             document.getElementById('left-temp').innerHTML = temp.toFixed() + "&#8451";
             document.getElementById('left-date').innerHTML = dateFormat(resultFromServer.dt);
             document.getElementById('high-temp').innerHTML = 'High: ' + high_temp.toFixed(0) + "&#8451";
@@ -76,7 +66,7 @@ function getLocation(){
             document.getElementById('desc1').innerHTML = desc.charAt(0).toUpperCase() + desc.slice(1);   
             document.getElementById('temp1').innerHTML = temp.toFixed(0) + "&#8451";
             
-            //get today forecast
+            //get 24 hours forecast
             fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=7&units=${units}&APPID=${appId}`).then(result => {
                 return result.json();
             }).then(result => {
@@ -97,7 +87,7 @@ function getLocation(){
                 }
             }
         }
-        //get forecast
+        //get 8 days forecast
         fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&units=${units}&cnt=8&APPID=${appIdForecast}`).then(result => {
             return result.json();
         }).then(result => {
@@ -114,28 +104,8 @@ function getLocation(){
 
                 document.getElementById(dateID).innerHTML = dateFormatF(date);   
                 document.getElementById(tempID).innerHTML = temp.toFixed(0) + "&#8451";
-
-                switch (icon){
-                case 'Clear':
-                        document.getElementById(iconID).innerHTML = '<i class="fal fa-sun-cloud"></i>';
-                        break;
-                case 'Clouds':
-                        document.getElementById(iconID).innerHTML = '<i class="fal fa-clouds"></i>';
-                        break;
-                case 'Thunderstorm':
-                        document.getElementById(iconID).innerHTML = '<i class="fal fa-thunderstorm"></i>';
-                        break;
-                case 'Snow':
-                        document.getElementById(iconID).innerHTML = '<i class="fal fa-snowflakes"></i>';
-                        break;
-                case 'Rain':
-                case 'Drizzle':
-                case 'Mist':
-                        document.getElementById(iconID).innerHTML = '<i class="fal fa-cloud-rain"></i>';
-                        break;
-                default:
-                        break;  
-            }
+                
+                weatherIcon(icon, iconID);
             }  
         }
     }); 
@@ -199,28 +169,8 @@ function forecast(){
 
                     document.getElementById(dateID).innerHTML = dateFormatF(date);   
                     document.getElementById(tempID).innerHTML = temp.toFixed(0) + "&#8451";
-                   
-                    switch (icon){
-                    case 'Clear':
-                            document.getElementById(iconID).innerHTML = '<i class="fal fa-sun-cloud"></i>';
-                            break;
-                    case 'Clouds':
-                            document.getElementById(iconID).innerHTML = '<i class="fal fa-clouds"></i>';
-                            break;
-                    case 'Thunderstorm':
-                            document.getElementById(iconID).innerHTML = '<i class="fal fa-thunderstorm"></i>';
-                            break;
-                    case 'Snow':
-                            document.getElementById(iconID).innerHTML = '<i class="fal fa-snowflakes"></i>';
-                            break;
-                    case 'Rain':
-                    case 'Drizzle':
-                    case 'Mist':
-                            document.getElementById(iconID).innerHTML = '<i class="fal fa-cloud-rain"></i>';
-                            break;
-                    default:
-                            break;  
-                }
+                    
+                    weatherIcon(icon, iconID); 
                 }  
             }
             
@@ -252,7 +202,6 @@ function search() {
                 let lon = resultFromServer.coord.lon;
                 let desc = resultFromServer.weather[0].description;  
                 
-                
                 $(function(){
                     $.get(`http://api.timezonedb.com/v2.1/get-time-zone?key=4DVH3B4RX5SQ&format=json&by=position&lat=${lat}&position&lng=${lon}`)
                     .done(function(json){
@@ -262,27 +211,9 @@ function search() {
                         document.getElementById('left-city').innerHTML = city + ", " + country;
                     });
                 }); 
-                switch (resultFromServer.weather[0].main){
-                    case 'Clear':
-                            document.getElementById('left-icon').innerHTML = '<i class="fal fa-sun-cloud"></i>';
-                            break;
-                    case 'Clouds':
-                            document.getElementById('left-icon').innerHTML = '<i class="fal fa-clouds"></i>';
-                            break;
-                    case 'Thunderstorm':
-                            document.getElementById('left-icon').innerHTML = '<i class="fal fa-thunderstorm"></i>';
-                            break;
-                    case 'Snow':
-                            document.getElementById('left-icon').innerHTML = '<i class="fal fa-snowflakes"></i>';
-                            break;
-                    case 'Rain':
-                    case 'Drizzle':
-                    case 'Mist':
-                            document.getElementById('left-icon').innerHTML = '<i class="fal fa-cloud-rain"></i>';
-                            break;
-                    default:
-                            break;  
-                }
+                let weatherMain = resultFromServer.weather[0].main;
+                weatherIcon(weatherMain, 'left-icon');
+               
                 document.getElementById('left-temp').innerHTML = temp.toFixed() + "&#8451";
                 document.getElementById('left-date').innerHTML = dateFormat(resultFromServer.dt);
                 document.getElementById('high-temp').innerHTML = 'High: ' + high_temp.toFixed(0) + "&#8451";
@@ -300,6 +231,29 @@ function search() {
         }
      });
 }
+function weatherIcon(resultFromServer, id){
+    switch (resultFromServer){
+        case 'Clear':
+                document.getElementById(id).innerHTML = '<i class="fal fa-sun-cloud"></i>';
+                break;
+        case 'Clouds':
+                document.getElementById(id).innerHTML = '<i class="fal fa-clouds"></i>';
+                break;
+        case 'Thunderstorm':
+                document.getElementById(id).innerHTML = '<i class="fal fa-thunderstorm"></i>';
+                break;
+        case 'Snow':
+                document.getElementById(id).innerHTML = '<i class="fal fa-snowflakes"></i>';
+                break;
+        case 'Rain':
+        case 'Drizzle':
+        case 'Mist':
+                document.getElementById(id).innerHTML = '<i class="fal fa-cloud-rain"></i>';
+                break;
+        default:
+                break;  
+    }
+}
 function dateFormatF(resultFromServer){
     var monthNames = [
     "Jan", "Feb", "Mar",
@@ -316,7 +270,7 @@ function dateFormatF(resultFromServer){
 function dateFormat(resultFromServer){
     var monthNames = [
     "January", "February", "March",
-    "April", "May", "June", "July",
+    "April", "May", "June", "July", 
     "August", "September", "October",
     "November", "December"];
 

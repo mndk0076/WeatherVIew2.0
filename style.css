@@ -7,7 +7,11 @@ body{
     background-size: 100% 100vh;
     background-position: center center;
     background-attachment: fixed;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
+/* ========================================= Top Section ============================================= */
 #container{
     height: 85vh;
     width: 85%;
@@ -17,6 +21,7 @@ body{
     margin:auto;
     display: inline-block;
     box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    z-index: 5;
 }
 #top-section{
     height: 35%;
@@ -45,7 +50,7 @@ body{
     color: coral;
 }
 .city{
-    font-size: 17px;
+    font-size: 20px;
 }
 .temp{
     font-size: 22px;
@@ -89,7 +94,6 @@ body{
     margin-left: 10px;
 }
 #top-bot-wrapper{
-    display: flex;
     height: 30%;
     width: 100%;
 }
@@ -109,7 +113,7 @@ body{
     color: whitesmoke;
     padding-left: 10px;
     width: 135px;
-    height: 27px;
+    height: 35px;
     border: none;
     -webkit-appearance: button;
     outline: none;
@@ -117,6 +121,7 @@ body{
 }
 #search{
     display: inline-block;
+    padding: 5px;
 }
 form input[type=text], select, #search {
     background-color: rgb(35, 131, 189, .75);
@@ -135,20 +140,7 @@ form input[type=text], select, #search {
     opacity: 1; /* Firefox */
     font-size: 14px;;
 }
-/*not working
-.region:before{
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    background: red;
-}
-.region select option{
-    background-color: #33CC33;
-}*/
-/* LEFT SECTION */
+/* ========================================= Left Section ============================================= */
 #left-section{
     background-color: rgb(189, 93, 35, .75);
     width: 40%;
@@ -212,7 +204,7 @@ form input[type=text], select, #search {
     padding-left: 10px;
     margin: 5px 0;
 }
-/* RIGHT SECTION */
+/* ========================================= Right Section ============================================= */
 #right-section{
     background-color: rgb(35, 131, 189, .75);
     width: 60%;
@@ -233,6 +225,7 @@ form input[type=text], select, #search {
 #today-menu{
     margin-left: 20px;
     background-color: coral;
+    font-size: 18px;
 }
 #today-menu:hover, #forecast-menu:hover{
     cursor: pointer;
@@ -241,10 +234,8 @@ form input[type=text], select, #search {
     width: 70%;
     height: 88%;
     text-align: center;
-    margin: 0 auto;
+    margin: auto;
     margin-top: -10px;
-    margin-left: 20%;
-    position: absolute;
 }
 .right-left-col{
     width: 25%;
@@ -280,6 +271,7 @@ form input[type=text], select, #search {
 }
 #forecast-menu{
     margin-left: -15px;
+    font-size: 18px;
 }
 #forecast{
     height: 88%;
@@ -326,8 +318,37 @@ form input[type=text], select, #search {
     font-size: 40px;
     color: coral; 
 }
-
-
+/* ========================================= Spinner ============================================= */
+.spinner{
+    width: 80px;
+    height: 80px;
+    border: 2px solid #f3f3f3;
+    border-top:3px solid coral;
+    border-radius: 100%;  
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right: 0;
+    margin: auto;
+    animation: spin 1s infinite linear;
+}
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
+}
+#overlay{
+  z-index: 10;
+  height:100%;
+  width:100%;
+  background:rgba(255, 255, 255, 1);
+  position:fixed;
+  left:0;
+  top:0;
+ }
 
 
 
